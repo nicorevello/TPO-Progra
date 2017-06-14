@@ -1,6 +1,6 @@
 package auxiliares;
 
-public final class Dias { //puto el que lee
+public final class Dias {
 
 	private static Dias instancia;
 	
