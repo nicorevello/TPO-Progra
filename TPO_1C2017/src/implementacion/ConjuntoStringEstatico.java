@@ -6,12 +6,13 @@ import tda.ConjuntoStringTDA;
 
 public class ConjuntoStringEstatico implements ConjuntoStringTDA {
 
+	final int MAX=1000;
 	private int cantidad;
 	private String[]palabras;
 
 	public void inicializar() {
 	cantidad=0;
-	palabras=new String[1000];
+	palabras=new String[MAX];
 
 	}
 
