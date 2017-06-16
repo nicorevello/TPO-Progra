@@ -4,8 +4,8 @@ import tda.ColaPrioridadInvertidaTDA;
 
 public class ColaPrioridadInvertidaEstatica implements ColaPrioridadInvertidaTDA {
 	final int MAX=1000;
-	int []valor;
-	int []prioridad;
+	int []valores;
+	int []prioridades;
 	int cant;
 	
 	public void inicializar(){
@@ -15,8 +15,17 @@ public class ColaPrioridadInvertidaEstatica implements ColaPrioridadInvertidaTDA
 	}
 	
 	public void acolar(int valor, int prioridad){
-	    
-	      
+	    	int i;
+		for(i=0;i<cant;i++);{
+			if(prioridades[i]>prioridad)
+				break;
+		}
+		if(i=cant){
+			valores[cant]=valor;
+			prioridades[cant]=prioridad;
+			cant++;
+		} else{
+			
 
 	}
 	
