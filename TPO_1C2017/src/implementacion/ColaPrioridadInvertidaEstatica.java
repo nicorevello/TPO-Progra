@@ -16,11 +16,10 @@ public class ColaPrioridadInvertidaEstatica implements ColaPrioridadInvertidaTDA
 	
 	public void acolar(int valor, int prioridad){
 	    	int i;
-		for(i=0;i<cant;i++);{
-			if(prioridades[i]>prioridad)
-				break;
+		for(i=0;i<cant || prioridades[i]>prioridad;i++);{
+			;
 		}
-		if(i=cant){
+		if(i==cant){
 			valores[cant]=valor;
 			prioridades[cant]=prioridad;
 			cant++;
@@ -47,11 +46,11 @@ public class ColaPrioridadInvertidaEstatica implements ColaPrioridadInvertidaTDA
 	}
 		
 	public int primero(){
-	    return valor[0];
+	    return valores[0];
 	}
 	
 	public int prioridad(){
-	    return prioridad[cant-1];//preguntar
+	    return prioridades[0];
 	}
 	
 	public boolean colaVacia(){
