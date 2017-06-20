@@ -7,15 +7,9 @@ import tda.DMedicionesTDA;
 
 public class DMediciones implements DMedicionesTDA {
 	
-	class nodoClave{
-		int anio;
-		int mes;
-		int dia;
-	}
-	
 	class Elemento{
-		nodoClave clave;
-		int valor;
+		int clave; //va a ser anio, mes, dia
+		int valor; // va a ser la medicion
 	}
 	
 	Elemento[] elementos;
@@ -27,37 +21,21 @@ public class DMediciones implements DMedicionesTDA {
 	}
 
 	public void agregar(int anio, int mes, int dia, float medicion) { 
-		int clave= anio+mes+dia;
-		int pos= Clave2Indice(clave);
-		if(pos==1){
-			pos=cant;
-			elementos[pos]=new Elemento();
-			elementos[pos].clave=anio,mes,dia;
-			cant++;
-		}
-		elementos[]
+		int clave=anio*10000+mes*100+dia;
+		
 	}
 	
-	private int Clave2Indice(int clave){
-		int i=cant-1;
-		while(i>=0&&elementos[i].clave!=clave){
-			i--;
-		}
-		return i;
-	}
 
 	public void eliminarAnio(int anio) {
 		
 
 	}
 
-	@Override
 	public void eliminarMes(int dia) {
 	
 
 	}
 
-	@Override
 	public void eliminarDia(int anio, int mes, int dia) {
 		// TODO Auto-generated method stub
 
@@ -72,7 +50,7 @@ public class DMediciones implements DMedicionesTDA {
 		return c;
 	}
 
-	public ConjuntoMesesTDA meses(int anio) { //falta implementar conjunto meses todavia
+	public ConjuntoMesesTDA meses(int anio) { //falta implementar conjuntoMeses todavia
 		
 	}
 
@@ -80,7 +58,7 @@ public class DMediciones implements DMedicionesTDA {
 		ColaTDA c=new ColaDinamica();
 		c.inicializarCola();
 		for(int i=0;i<cant;i++){
-			c.acolar(elementos[i].clave); ////ESTA MAL, COMO CARGO SOLO LAS MEDICIONES?
+			c.acolar(elementos[i].valor); 
 		}
 		return c;
 	}
