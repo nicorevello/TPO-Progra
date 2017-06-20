@@ -7,10 +7,17 @@ import tda.DMedicionesTDA;
 
 public class DMediciones implements DMedicionesTDA {
 	
+	class nodoClave{
+		int anio;
+		int mes;
+		int dia;
+	}
+	
 	class Elemento{
-		int clave;
+		nodoClave clave;
 		int valor;
 	}
+	
 	Elemento[] elementos;
 	int cant;
 	
@@ -19,14 +26,28 @@ public class DMediciones implements DMedicionesTDA {
 		elementos=new Elemento[1000]; //modificar numero?
 	}
 
-	public void agregar(int anio, int mes, int dia, float medicion) { //cual seria la clave?
-		
-
+	public void agregar(int anio, int mes, int dia, float medicion) { 
+		int clave= anio+mes+dia;
+		int pos= Clave2Indice(clave);
+		if(pos==1){
+			pos=cant;
+			elementos[pos]=new Elemento();
+			elementos[pos].clave=anio,mes,dia;
+			cant++;
+		}
+		elementos[]
+	}
+	
+	private int Clave2Indice(int clave){
+		int i=cant-1;
+		while(i>=0&&elementos[i].clave!=clave){
+			i--;
+		}
+		return i;
 	}
 
-	@Override
 	public void eliminarAnio(int anio) {
-	
+		
 
 	}
 
@@ -46,21 +67,22 @@ public class DMediciones implements DMedicionesTDA {
 		ConjuntoTDA c=new ConjuntoEstatico();
 		c.inicializar();
 		for(int i=0;i<cant;i++){
-			c.agregar(elementos[i].clave);
+			c.agregar(elementos[i].clave); //ESTA MAL, COMO CARGO SOLO EL AÑO?
 		}
 		return c;
 	}
 
-	@Override
-	public ConjuntoMesesTDA meses(int anio) {
-		// TODO Auto-generated method stub
-		return null;
+	public ConjuntoMesesTDA meses(int anio) { //falta implementar conjunto meses todavia
+		
 	}
 
-	@Override
 	public ColaTDA mediciones() {
-		// TODO Auto-generated method stub
-		return null;
+		ColaTDA c=new ColaDinamica();
+		c.inicializarCola();
+		for(int i=0;i<cant;i++){
+			c.acolar(elementos[i].clave); ////ESTA MAL, COMO CARGO SOLO LAS MEDICIONES?
+		}
+		return c;
 	}
 
 }
