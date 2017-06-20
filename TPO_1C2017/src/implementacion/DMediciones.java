@@ -6,17 +6,21 @@ import tda.ConjuntoTDA;
 import tda.DMedicionesTDA;
 
 public class DMediciones implements DMedicionesTDA {
-
-	@Override
-	public void inicializar() {
+	
+	class Elemento{
 		int clave;
-		int [] valores;
-		int cantValores;
+		int valor;
+	}
+	Elemento[] elementos;
+	int cant;
+	
+	public void inicializar() {
+		cant=0;
+		elementos=new Elemento[1000]; //modificar numero?
 	}
 
-	@Override
-	public void agregar(int anio, int mes, int dia, float medicion) {
-	
+	public void agregar(int anio, int mes, int dia, float medicion) { //cual seria la clave?
+		
 
 	}
 
@@ -38,10 +42,13 @@ public class DMediciones implements DMedicionesTDA {
 
 	}
 
-	@Override
 	public ConjuntoTDA anios() {
-		// TODO Auto-generated method stub
-		return null;
+		ConjuntoTDA c=new ConjuntoEstatico();
+		c.inicializar();
+		for(int i=0;i<cant;i++){
+			c.agregar(elementos[i].clave);
+		}
+		return c;
 	}
 
 	@Override
