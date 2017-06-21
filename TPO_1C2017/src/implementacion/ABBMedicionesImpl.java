@@ -11,7 +11,7 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 		raiz = null;
 	}
 
-	public void agregar(String campo, int anio, int mes, int dia, float medicion) {
+	public void agregar(String campo, int anio, int mes, int dia, float medicion) {//preguntar float
 		if (raiz==null){
 			raiz=new NodoCampo();
 			raiz.ciudad=campo;

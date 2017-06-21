@@ -11,7 +11,7 @@ public final class Dias {
 			instancia = new Dias();
 		return instancia;
 	}
-	
+
 	public int cantidadDias(int mes, int anio){
 		if(mes == 4 || mes == 6 || mes == 9 || mes == 11)
 			return 30;
