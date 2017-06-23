@@ -21,10 +21,10 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 			raiz.hijoI.inicializar();
 			raiz.hijoD.inicializar();
 		}
-		else if(campo.compareTo(raiz.ciudad)>0){ //compareTo compara lexicograficamente
+		else if(campo.compareToIgnoreCase(raiz.ciudad)>0){ //compareTo compara lexicograficamente
 			raiz.hijoD.agregar(campo, anio, mes, dia, medicion);
 		}
-		else if(campo.compareTo(raiz.ciudad)<0){ 
+		else if(campo.compareToIgnoreCase(raiz.ciudad)<0){ 
 			raiz.hijoI.agregar(campo, anio, mes, dia, medicion);
 		}
 
@@ -43,10 +43,10 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 				raiz.ciudad=menor(raiz.hijoD);
 				raiz.hijoD.eliminar(raiz.ciudad);
 			}
-			else if (campo.compareTo(raiz.ciudad)<0){
+			else if (campo.compareToIgnoreCase(raiz.ciudad)<0){
 				raiz.hijoI.eliminar(campo);
 			}
-			else if (campo.compareTo(raiz.ciudad)>0){
+			else if (campo.compareToIgnoreCase(raiz.ciudad)>0){
 				raiz.hijoD.eliminar(campo);
 			}
 		}
@@ -71,10 +71,10 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 		if (campo.equalsIgnoreCase(raiz.ciudad)){
 			raiz.mediciones.eliminarDia(anio, mes, dia);			
 		}
-		else if (campo.compareTo(raiz.ciudad)>0){
+		else if (campo.compareToIgnoreCase(raiz.ciudad)>0){
 			raiz.hijoD.eliminarMedicionDia(campo, anio, mes, dia);
 		}
-		else if (campo.compareTo(raiz.ciudad)>0){
+		else if (campo.compareToIgnoreCase(raiz.ciudad)>0){
 			raiz.hijoI.eliminarMedicionDia(campo, anio, mes, dia);
 		}
 
