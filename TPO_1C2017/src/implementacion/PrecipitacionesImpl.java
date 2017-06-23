@@ -72,13 +72,43 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 
 	@Override
 	public float promedioMensual(String campo, int anio, int mes) {
-		// TODO Auto-generated method stub
-		return 0;
+		int suma=0;
+		int total=0;
+		DiccionarioSimpleTDA d = new DiccionarioSimpleImpl();
+		ConjuntoTDA c= new ConjuntoEstatico();
+		int []vec= new int[1000];
+		ABBMedicionesTDA aux= new ABBMedicionesImpl();
+		aux= arbol;
+		while(campo.compareTo(aux.campo()) != 0){
+			if(campo.compareToIgnoreCase(aux.campo()) < 0)
+				aux=aux.hijoDerecho();
+			else if(campo.compareToIgnoreCase(aux.campo()) > 0)
+				aux=aux.hijoIzquierdo();
+		}
+		c=aux.mediciones().mediciones(anio, mes).claves();
+		for(int i=0;!c.conjuntoVacio();i++)
+		{
+			vec[i]=c.elegir();
+			c.sacar(vec[i]);
+			total++;
+		}
+		for(int i=0;i<total;i++)
+			suma=aux.mediciones().mediciones(anio, mes).recuperar(vec[i]);
+		return suma/total;
 	}
 
 	@Override
-	public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) {
-		// TODO Auto-generated method stub
+	public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) { //hay que terminar
+		ColaPrioridadInvertidaTDA c= new ColaPrioridadInvertidaEstatica();
+		ABBMedicionesTDA aux= new ABBMedicionesImpl();
+		int [][]años= new int[100][2];
+		while(campos.compareTo(aux.campo()) != 0){
+			if(campos.compareToIgnoreCase(aux.campo()) < 0)
+				aux=aux.hijoDerecho();
+			else if(campos.compareToIgnoreCase(aux.campo()) > 0)
+				aux=aux.hijoIzquierdo();
+		}
+		
 		return null;
 	}
 
