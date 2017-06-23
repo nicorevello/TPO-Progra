@@ -18,7 +18,7 @@ public class DMediciones implements DMedicionesTDA {
 	
 	public void inicializar() {
 		cant=0;
-		elementos=new Elemento[1000]; //modificar numero?
+		elementos=new Elemento[1000];
 	}
 
 	public void agregar(int anio, int mes, int dia, int medicion) { 
@@ -67,8 +67,15 @@ public class DMediciones implements DMedicionesTDA {
 		return c;
 	}
 
-	public ConjuntoTDA meses(int anio) { //falta implementar conjuntoMeses todavia
-		
+	public ConjuntoTDA meses(int anio) {
+		ConjuntoTDA c = new ConjuntoEstatico();
+		int valor;
+		for(int i=0;i<cant;i++){
+			valor= elementos[i].clave%10000;
+			valor=valor/100;
+			c.agregar(valor);
+		}
+		return c;
 	}
 
 	public ColaTDA mediciones() {
