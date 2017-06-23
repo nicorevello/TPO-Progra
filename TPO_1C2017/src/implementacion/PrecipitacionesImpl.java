@@ -3,6 +3,7 @@ package implementacion;
 import tda.ColaPrioridadInvertidaTDA;
 import tda.ConjuntoStringTDA;
 import tda.PrecipitacionesTDA;
+import auxiliares.Dias;
 import tda.ABBMedicionesTDA;
 
 public class PrecipitacionesImpl implements PrecipitacionesTDA {
@@ -46,11 +47,21 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 		
 	}
 
-	public ColaPrioridadInvertidaTDA mediciones(String campo, int anio, int mes) { //falta terminar
+	public ColaPrioridadInvertidaTDA mediciones(String campo, int anio, int mes) {
 		ColaPrioridadInvertidaTDA c = new ColaPrioridadInvertidaEstatica();
 		c.inicializar();
-		
-		
+		ABBMedicionesTDA arbolAux = arbol;
+		while(!arbolAux.campo().equalsIgnoreCase(campo)){
+			if(arbolAux.campo().compareToIgnoreCase(campo)>0)
+			arbolAux = arbolAux.hijoDerecho();
+			if(arbolAux.campo().compareToIgnoreCase(campo)<0)
+				arbolAux = arbolAux.hijoIzquierdo();
+		}
+		int cant = Dias.getInstancia().cantidadDias(mes, anio);
+		for(int i = 0; i<cant; i++){
+			int precipitacion = arbolAux.mediciones().mediciones(anio, mes).recuperar(i);
+			c.acolar(precipitacion, i);
+		}
 		return c;
 	}
 
