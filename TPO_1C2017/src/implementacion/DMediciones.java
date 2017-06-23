@@ -1,5 +1,6 @@
 package implementacion;
 
+import auxiliares.Dias;
 import tda.ColaTDA;
 import tda.ConjuntoMesesTDA;
 import tda.ConjuntoTDA;
@@ -20,24 +21,40 @@ public class DMediciones implements DMedicionesTDA {
 		elementos=new Elemento[1000]; //modificar numero?
 	}
 
-	public void agregar(int anio, int mes, int dia, float medicion) { 
-		int clave=anio*10000+mes*100+dia;
+	public void agregar(int anio, int mes, int dia, int medicion) { 
 		
+		elementos[cant].clave=anio*10000+mes*100+dia;
+		elementos[cant].valor=medicion;
+		cant++;
 	}
 	
 
 	public void eliminarAnio(int anio) {
 		
+		
 
 	}
 
-	public void eliminarMes(int dia) {
-	
+	public void eliminarMes(int anio, int mes) {
+		int cantdias=Dias.getInstancia().cantidadDias(mes,anio);
+		for(int i=0;i<cantdias;i++){
+			eliminarDia(anio,mes,i+1);
+		}
 
 	}
 
 	public void eliminarDia(int anio, int mes, int dia) {
-		// TODO Auto-generated method stub
+		int i=0;
+		for(;i<cant &&elementos[i].clave!=anio*10000+mes*100+dia;i++)
+			;
+		if(elementos[i].clave==anio*10000+mes*100+dia){
+			while(i<cant)
+			{
+				elementos[i]=elementos[i+1];
+			}
+			cant--;
+			
+		}
 
 	}
 
