@@ -62,12 +62,12 @@ public class DMediciones implements DMedicionesTDA {
 		ConjuntoTDA c=new ConjuntoEstatico();
 		c.inicializar();
 		for(int i=0;i<cant;i++){
-			c.agregar(elementos[i].clave); //ESTA MAL, COMO CARGO SOLO EL AÑO?
+			c.agregar(elementos[i].clave/10000); 
 		}
 		return c;
 	}
 
-	public ConjuntoMesesTDA meses(int anio) { //falta implementar conjuntoMeses todavia
+	public ConjuntoTDA meses(int anio) { //falta implementar conjuntoMeses todavia
 		
 	}
 
