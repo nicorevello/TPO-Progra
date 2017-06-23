@@ -8,7 +8,7 @@ public interface DMedicionesTDA {
 	
 	public void eliminarAnio(int anio);
 	
-	public void eliminarMes(int dia);
+	public void eliminarMes(int anio,int mes);
 	
 	public void eliminarDia(int anio, int mes, int dia);
 	
