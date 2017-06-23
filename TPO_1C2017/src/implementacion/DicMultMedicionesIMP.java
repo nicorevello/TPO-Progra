@@ -38,7 +38,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		aux.medicionMes = aux2;
 	}
 
-	private NodoMedicionesAnio clavehelp(int anio){
+	private NodoMedicionesAnio clavehelp(int anio){ //clavehelp busca nodo del año
 		NodoMedicionesAnio aux = origen;
 		while(aux != null && aux.anio != anio){
 			aux = aux.siguienteAnio;
@@ -46,7 +46,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		return aux;
 	}
 	
-	private NodoMedicionesMes clavehelp2(int mes){
+	private NodoMedicionesMes clavehelp2(int mes){ //clavehelp2 busca el nodo del mes.
 		NodoMedicionesMes aux = origen.medicionMes;
 		while(aux != null && aux.mes != mes){
 			aux = aux.siguienteMes;
