@@ -37,11 +37,13 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 	}
 	
 	private void CargarString(ABBMedicionesTDA arbol, ConjuntoStringTDA c ){ //CAMBIAR
-		if(!arbol.hijoDerecho().arbolMedicionesVacio())
-			CargarString(arbol.hijoDerecho(),c);
-		if(!arbol.hijoIzquierdo().arbolMedicionesVacio())
-			CargarString(arbol.hijoIzquierdo(),c);
+		if(arbol.hijoDerecho().arbolMedicionesVacio() && arbol.hijoIzquierdo().arbolMedicionesVacio())
 		c.agregar(arbol.campo());
+		else if(!arbol.hijoDerecho().arbolMedicionesVacio())
+			CargarString(arbol.hijoDerecho(),c);
+		else if(!arbol.hijoIzquierdo().arbolMedicionesVacio())
+			CargarString(arbol.hijoIzquierdo(),c);
+		
 	}
 
 	public ColaPrioridadInvertidaTDA mediciones(String campo, int anio, int mes) { //falta terminar
