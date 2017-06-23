@@ -54,9 +54,22 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		return aux;
 	}
 	
-	public void eliminarAnio(int anio) {
-		
+	public void eliminarAnio(int anio) { //ver
+		if(origen!= null ) {
+			if (origen.anio == anio) {
+			origen = origen.siguienteAnio;
+			}
+			else {
+			NodoMedicionesAnio aux = origen;
+			while (aux.siguienteAnio != null && aux.siguienteAnio.anio != anio){
+			aux = aux.siguienteAnio;
+			}
+			if (aux.siguienteAnio!= null ) {
+			aux.siguienteAnio= aux.siguienteAnio.siguienteAnio;
+			}
+		}
 	}
+}
 
 	
 	public void eliminarMes(int mes, int anio) {
