@@ -59,11 +59,11 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	}
 
 	
-	public void eliminarMes(int mes, int anio) { //VER! REVISAR!
+	public void eliminarMes(int mes, int anio) {
 		if(origen!=null){
 			if(origen.anio == anio){
 				Eliminar(origen, mes);
-				if(origen.anio == null){//VER!!!!!!
+				if(origen.medicionMes == null){//VER!!!!!!
 					origen = origen.siguienteAnio;
 				}
 			}
@@ -99,7 +99,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		}
 	}
 	
-	public void eliminarDia(int anio, int mes, int dia) {//VER! No modifica el posta!, sino aux
+	public void eliminarDia(int anio, int mes, int dia) {//VER! No modifica el real, sino aux
 		NodoMedicionesAnio aux = origen;
 		aux = clavehelp(anio);
 		aux.medicionMes = clavehelp2(mes);

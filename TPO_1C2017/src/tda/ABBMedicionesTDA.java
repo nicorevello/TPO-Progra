@@ -4,7 +4,7 @@ public interface ABBMedicionesTDA {
 
 	public void inicializar();
 	
-	public void agregar(String campo, int anio, int mes, int dia, float medicion);
+	public void agregar(String campo, int anio, int mes, int dia, int medicion);
 	
 	public void eliminar(String campo);
 	
