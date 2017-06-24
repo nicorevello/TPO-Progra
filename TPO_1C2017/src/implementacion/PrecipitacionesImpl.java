@@ -77,7 +77,9 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 		int suma=0;
 		int total=0;
 		DiccionarioSimpleTDA d = new DiccionarioSimpleImpl();
+		d.inicializar();
 		ConjuntoTDA c= new ConjuntoEstatico();
+		c.inicializar();
 		int []vec= new int[1000];
 		ABBMedicionesTDA aux= new ABBMedicionesImpl();
 		aux= arbol;
@@ -102,16 +104,44 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 	@Override
 	public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) { //hay que terminar
 		ColaPrioridadInvertidaTDA c= new ColaPrioridadInvertidaEstatica();
+		c.inicializar();
 		ABBMedicionesTDA aux= new ABBMedicionesImpl();
-		int [][]años= new int[100][2];
+		DiccionarioSimpleTDA ds=new DiccionarioSimpleImpl();
+		ds.inicializar();
+		int []vec= new int[100];
+		int suma;
+		int cantanios=0;
+		ConjuntoTDA anios = new ConjuntoEstatico();
+		anios.inicializar();
+		ConjuntoTDA meses = new ConjuntoEstatico();
+		meses.inicializar();
 		while(campos.compareTo(aux.campo()) != 0){
 			if(campos.compareToIgnoreCase(aux.campo()) < 0)
 				aux=aux.hijoDerecho();
 			else if(campos.compareToIgnoreCase(aux.campo()) > 0)
 				aux=aux.hijoIzquierdo();
 		}
+		anios=aux.mediciones().anios();
+		for(int i=0;!anios.conjuntoVacio();i++)
+		{
+			vec[i]=anios.elegir();
+			anios.sacar(vec[i]);
+			cantanios++;
+		}
+		int i=0;
+		int j=0;
+		for(;i<cantanios;i++)){
+			meses=aux.mediciones().meses(vec[i]);
+			if(meses.pertenece(mes)){
+				ds=aux.mediciones().mediciones(vec[i], mes);
+				suma=0;
+				for(;i<Dias.getInstancia().cantidadDias(mes,vec[i]);j++)
+					suma=ds.recuperar(j+1)+suma;
+				c.acolar(suma ,vec[i]);
+			}
 		
-		return null;
+		
+		return c;
 	}
 
 }
