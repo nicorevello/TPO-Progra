@@ -41,7 +41,7 @@ public class DiccionarioSimpleImpl implements DiccionarioSimpleTDA {
 	public void eliminar(int clave) {
 		// TODO Auto-generated method stub
 		int pos=Clave2Indice(clave);
-		if(pos!=1){
+		if(pos!=-1){
 			elementos[pos]=elementos[cant-1];
 			cant--;
 		}
