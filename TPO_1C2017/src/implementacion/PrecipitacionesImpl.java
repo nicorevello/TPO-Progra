@@ -130,7 +130,7 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 		}
 		int i=0;
 		int j=0;
-		for(;i<cantanios;i++)){
+		for(;i<cantanios;i++){
 			meses=aux.mediciones().meses(vec[i]);
 			if(meses.pertenece(mes)){
 				ds=aux.mediciones().mediciones(vec[i], mes);
@@ -143,5 +143,5 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 		
 		return c;
 	}
-
+	}
 }
