@@ -26,6 +26,14 @@ public class DMediciones implements DMedicionesTDA {
 		elementos[cant].valor=medicion;
 		cant++;
 	}
+	/**    OPCION PARA ELIMINAR AÑO
+	public void eliminarAnio(int anio) {
+		for(int i=0;i<cant;i++)
+			if(elementos[i].clave>=anio*10000 && elementos[i].clave< (anio+1)*10000)
+				eliminarDia(elementos[i].clave/10000,elementos[i].clave%10000/100,elementos[i].clave%10000%100);
+	}
+	
+	**/
 	
 
 	public void eliminarAnio(int anio) {
