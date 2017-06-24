@@ -29,9 +29,22 @@ public class DMediciones implements DMedicionesTDA {
 	
 
 	public void eliminarAnio(int anio) {
-		
-		
-
+		for(int mes = 12; mes != 0; mes--){
+			for(int dia = 31; dia != 0; dia--){
+				int pos=buscarPos(anio*10000+mes*100+dia);
+				if(pos!=-1){
+					elementos[pos]=elementos[cant-1];
+					cant--;
+					}
+				}
+			}
+		}
+	
+	private int buscarPos(int clave){
+		int i=cant-1;
+		while(i>=0 && elementos[i].clave !=clave)
+			i--;
+		return i;
 	}
 
 	public void eliminarMes(int anio, int mes) {
