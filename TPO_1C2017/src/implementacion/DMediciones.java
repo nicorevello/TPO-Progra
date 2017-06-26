@@ -64,8 +64,8 @@ public class DMediciones implements DMedicionesTDA {
 	}
 
 	public void eliminarDia(int anio, int mes, int dia) {
-		int i=0;
-		for(;i<cant &&elementos[i].clave!=anio*10000+mes*100+dia;i++)
+		int i;
+		for(i = 0;i<cant &&elementos[i].clave!=anio*10000+mes*100+dia;i++)
 			;
 		if(elementos[i].clave==anio*10000+mes*100+dia){
 			while(i<cant)
