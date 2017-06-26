@@ -40,13 +40,11 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 	}
 	
 	private void CargarString(ABBMedicionesTDA arbol, ConjuntoStringTDA c ){
-		ABBMedicionesTDA aux = new ABBMedicionesImpl();
-		aux = arbol;
-		if(!aux.hijoDerecho().arbolMedicionesVacio())
-			CargarString(aux.hijoDerecho(),c);
-		if(!aux.hijoIzquierdo().arbolMedicionesVacio())
-			CargarString(aux.hijoIzquierdo(),c);
-		c.agregar(aux.campo());
+		if(!arbol.hijoDerecho().arbolMedicionesVacio())
+			CargarString(arbol.hijoDerecho(),c);
+		if(!arbol.hijoIzquierdo().arbolMedicionesVacio())
+			CargarString(arbol.hijoIzquierdo(),c);
+		c.agregar(arbol.campo());
 	}
 
 	public ColaPrioridadInvertidaTDA mediciones(String campo, int anio, int mes) {
@@ -92,7 +90,7 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 	}
 		
 
-	@Override
+
 	public float promedioMensual(String campo, int anio, int mes) {
 		int suma=0;
 		int total=0;
@@ -120,7 +118,7 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 	}
 
 	
-	public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) { //hay que terminar
+	public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) {
 		ColaPrioridadInvertidaTDA c= new ColaPrioridadInvertidaEstatica();
 		c.inicializar();
 		ABBMedicionesTDA aux= new ABBMedicionesImpl();

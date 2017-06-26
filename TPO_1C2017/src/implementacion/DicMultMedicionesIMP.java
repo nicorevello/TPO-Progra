@@ -76,7 +76,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		if(origen!=null){
 			if(origen.anio == anio){
 				Eliminar(origen, mes);
-				if(origen.medicionMes == null){//VER!!!!!!
+				if(origen.medicionMes == null){
 					origen = origen.siguienteAnio;
 				}
 			}
@@ -112,7 +112,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		}
 	}
 	
-	public void eliminarDia(int anio, int mes, int dia) {//VER! No modifica el real, sino aux
+	public void eliminarDia(int anio, int mes, int dia) {
 		NodoMedicionesAnio aux = origen;
 		aux = clavehelp(anio);
 		aux.medicionMes = clavehelp2(mes);
