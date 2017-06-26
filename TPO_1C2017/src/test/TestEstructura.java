@@ -11,7 +11,7 @@ public class TestEstructura {
 	 * Este main es para mediciones en float
 	 * 
 	 * */
-	public static void main(String[] Args) {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//PrecipitacionesTDA mediciones = null;
 		// crear la estructura 
