@@ -37,8 +37,45 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		aux2.siguienteMes = aux.medicionMes;
 		aux.medicionMes = aux2;
 	}
+		
+		/**NodoMedicionesAnio aux = clavehelp(anio);                         revisar esta forma!!
+		if(aux == null){
+			aux = new NodoMedicionesAnio();
+			aux.anio = anio;
+			aux.siguienteAnio = origen;
+			origen = aux;
+			NodoMedicionesMes aux2 = aux.medicionMes;
+			aux2 = new NodoMedicionesMes();
+			aux2.mes = mes;
+			aux2.cantidadDiasMes = Dias.getInstancia().cantidadDias(mes, anio);
+			aux2.precipitacionPorDia = new int [aux2.cantidadDiasMes];
+			for(int i = 0; i<aux2.cantidadDiasMes; i++){
+				aux2.precipitacionPorDia[i]=0;
+			}
+			aux2.siguienteMes = aux.medicionMes;
+			aux.medicionMes = aux2;
+			aux2.precipitacionPorDia[dia-1] = medicion;
+		}
+		else{
+			NodoMedicionesMes auxm = clavehelp2(aux, mes);
+			if(auxm == null){
+				NodoMedicionesMes aux2 = aux.medicionMes;
+				aux2 = new NodoMedicionesMes();
+				aux2.mes = mes;
+				aux2.cantidadDiasMes = Dias.getInstancia().cantidadDias(mes, anio);
+				aux2.precipitacionPorDia = new int [aux2.cantidadDiasMes];
+				for(int i = 0; i<aux2.cantidadDiasMes; i++ ){
+					aux2.precipitacionPorDia[i] = 0;
+					}
+				aux2.siguienteMes = aux.medicionMes;
+				aux.medicionMes = aux2;
+				aux2.precipitacionPorDia[dia-1] = medicion;
+				}
+		}
+	}*/
 
-	private NodoMedicionesAnio clavehelp(int anio){ //clavehelp busca nodo del año
+
+	private NodoMedicionesAnio clavehelp(int anio){ //clavehelp busca nodo del aÃ±o
 		NodoMedicionesAnio aux = origen;
 		while(aux != null && aux.anio != anio){
 			aux = aux.siguienteAnio;
@@ -53,6 +90,15 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		}
 		return aux;
 	}
+		
+	/**private NodoMedicionesMes clavehelp2(NodoMedicionesAnio aux, int mes){        Revisar esta forma!!
+		NodoMedicionesMes auxm = new NodoMedicionesMes();
+		auxm = aux.medicionMes;
+		while(auxm != null && auxm.mes != mes){
+			auxm = auxm.siguienteMes;
+		}
+		return auxm;
+	}*/	
 	
 	public void eliminarAnio(int anio) { //ver
 		if(origen!= null ) {
@@ -128,7 +174,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	}
 
 
-	public ConjuntoTDA anios() {//retorno conjunto de años de el campo
+	public ConjuntoTDA anios() {//retorno conjunto de aÃ±os de el campo
 		ConjuntoTDA resultado = new ConjuntoEstatico();
 		resultado.inicializar();
 		NodoMedicionesAnio aux = origen;
@@ -140,7 +186,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	}
 
 
-	public ConjuntoTDA meses(int anio) {//retorno conjunto de meses que tiene el año pedido
+	public ConjuntoTDA meses(int anio) {//retorno conjunto de meses que tiene el aÃ±o pedido
 		ConjuntoTDA resultado = new ConjuntoEstatico();
 		resultado.inicializar();
 		NodoMedicionesAnio aux = clavehelp(anio);
@@ -165,3 +211,4 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	}
 
 }
+
