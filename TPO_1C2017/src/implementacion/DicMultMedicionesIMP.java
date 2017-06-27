@@ -15,7 +15,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 
 	
 	public void agregar(int anio, int mes, int dia, int medicion) {
-		int posicion = dia-1;
+		/*int posicion = dia-1;
 		NodoMedicionesAnio aux = clavehelp(anio);
 		if(aux == null){
 			aux = new NodoMedicionesAnio();
@@ -37,15 +37,17 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		aux2.siguienteMes = aux.medicionMes;
 		aux.medicionMes = aux2;
 	}
+	//ESTE ES EL ORIGINAL
+	*/
 		
-		/**NodoMedicionesAnio aux = clavehelp(anio);                         revisar esta forma!!
+		NodoMedicionesAnio aux = clavehelp(anio);                        // revisar esta forma!!
 		if(aux == null){
 			aux = new NodoMedicionesAnio();
 			aux.anio = anio;
 			aux.siguienteAnio = origen;
 			origen = aux;
 			NodoMedicionesMes aux2 = aux.medicionMes;
-			aux2 = new NodoMedicionesMes();
+			//revisar//aux2 = new NodoMedicionesMes();
 			aux2.mes = mes;
 			aux2.cantidadDiasMes = Dias.getInstancia().cantidadDias(mes, anio);
 			aux2.precipitacionPorDia = new int [aux2.cantidadDiasMes];
@@ -72,33 +74,44 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 				aux2.precipitacionPorDia[dia-1] = medicion;
 				}
 		}
-	}*/
+	}
 
+	//Revisar esto. El error puede llegar estar aca.
 
 	private NodoMedicionesAnio clavehelp(int anio){ //clavehelp busca nodo del año
 		NodoMedicionesAnio aux = origen;
 		while(aux != null && aux.anio != anio){
 			aux = aux.siguienteAnio;
+			
 		}
-		return aux;
+		if(aux==null){
+		return aux = new NodoMedicionesAnio();
+		}
+		else
+			return aux;
 	}
+ //
 	
-	private NodoMedicionesMes clavehelp2(int mes){ //clavehelp2 busca el nodo del mes.
+	/*private NodoMedicionesMes clavehelp2(int mes){ //clavehelp2 busca el nodo del mes.
 		NodoMedicionesMes aux = origen.medicionMes;
 		while(aux != null && aux.mes != mes){
 			aux = aux.siguienteMes;
 		}
 		return aux;
-	}
 		
-	/**private NodoMedicionesMes clavehelp2(NodoMedicionesAnio aux, int mes){        Revisar esta forma!!
+		//ESTA ES EL ORIGINAL
+	}*/
+		
+	private NodoMedicionesMes clavehelp2(NodoMedicionesAnio aux, int mes){       // Revisar esta forma!!
 		NodoMedicionesMes auxm = new NodoMedicionesMes();
-		auxm = aux.medicionMes;
+		auxm = aux.medicionMes; 
+		//rastrear aux
 		while(auxm != null && auxm.mes != mes){
 			auxm = auxm.siguienteMes;
 		}
 		return auxm;
-	}*/	
+		
+	}
 	
 	public void eliminarAnio(int anio) { //ver
 		if(origen!= null ) {
@@ -161,7 +174,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	public void eliminarDia(int anio, int mes, int dia) {
 		NodoMedicionesAnio aux = origen;
 		aux = clavehelp(anio);
-		aux.medicionMes = clavehelp2(mes);
+		aux.medicionMes = clavehelp2(aux, mes);
 		aux.medicionMes.precipitacionPorDia[dia-1] = 0;
 		int a = 0;
 		for(int i=0; i<aux.medicionMes.cantidadDiasMes; i++){
@@ -203,7 +216,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		d.inicializar();
 		NodoMedicionesAnio a = origen;
 		a = clavehelp (anio);
-		a.medicionMes = clavehelp2(mes);
+		a.medicionMes = clavehelp2(a, mes);
 		for(int i=0; i<a.medicionMes.cantidadDiasMes; i++){
 			d.agregar(i+1, a.medicionMes.precipitacionPorDia[i]);
 		}

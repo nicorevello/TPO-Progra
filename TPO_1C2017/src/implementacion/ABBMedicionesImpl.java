@@ -15,6 +15,8 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 		if (raiz==null){
 			raiz=new NodoCampo();
 			raiz.ciudad=campo;
+			raiz.mediciones=new DicMultMedicionesIMP();
+			raiz.mediciones.inicializar();
 			raiz.mediciones.agregar(anio, mes, dia, medicion);
 			raiz.hijoI=new ABBMedicionesImpl();
 			raiz.hijoD=new ABBMedicionesImpl();
