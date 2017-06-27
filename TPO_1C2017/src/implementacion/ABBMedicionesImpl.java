@@ -11,7 +11,7 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 		raiz = null;
 	}
 
-	public void agregar(String campo, int anio, int mes, int dia, int medicion) {//preguntar float
+	public void agregar(String campo, int anio, int mes, int dia, int medicion) {
 		if (raiz==null){
 			raiz=new NodoCampo();
 			raiz.ciudad=campo;
@@ -38,11 +38,11 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 				raiz=null;
 			}
 			else if (raiz.ciudad.equalsIgnoreCase(campo)&&!raiz.hijoI.arbolMedicionesVacio()){
-				raiz.ciudad=mayor(raiz.hijoI);
+				raiz.ciudad=this.mayor(raiz.hijoI);
 				raiz.hijoI.eliminar(raiz.ciudad);
 			}
 			else if (raiz.ciudad.equalsIgnoreCase(campo)&&!raiz.hijoD.arbolMedicionesVacio()){
-				raiz.ciudad=menor(raiz.hijoD);
+				raiz.ciudad=this.menor(raiz.hijoD);
 				raiz.hijoD.eliminar(raiz.ciudad);
 			}
 			else if (campo.compareToIgnoreCase(raiz.ciudad)<0){
@@ -52,7 +52,6 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 				raiz.hijoD.eliminar(campo);
 			}
 		}
-
 	}
 	
 	private String menor(ABBMedicionesTDA a) {
@@ -70,20 +69,22 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 	}
 
 	public void eliminarMedicionDia(String campo, int anio, int mes, int dia) {
-		if (campo.equalsIgnoreCase(raiz.ciudad)){
-			raiz.mediciones.eliminarDia(anio, mes, dia);			
+		NodoCampo aux = new NodoCampo();
+		aux=raiz;
+		if (campo.equalsIgnoreCase(aux.ciudad)){
+			aux.mediciones.eliminarDia(anio, mes, dia);			
 		}
-		else if (campo.compareToIgnoreCase(raiz.ciudad)>0){
-			raiz.hijoD.eliminarMedicionDia(campo, anio, mes, dia);
+		else if (campo.compareToIgnoreCase(aux.ciudad)>0){
+			aux.hijoD.eliminarMedicionDia(campo, anio, mes, dia);
 		}
-		else if (campo.compareToIgnoreCase(raiz.ciudad)>0){
-			raiz.hijoI.eliminarMedicionDia(campo, anio, mes, dia);
+		else if (campo.compareToIgnoreCase(raiz.ciudad)<0){
+			aux.hijoI.eliminarMedicionDia(campo, anio, mes, dia);
 		}
 
 	}
 
 	public String campo() {
-		return raiz.ciudad;
+			return raiz.ciudad;
 	}
 
 	public DMMedicionesTDA mediciones() {

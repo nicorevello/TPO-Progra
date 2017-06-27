@@ -59,19 +59,23 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 			aux2.precipitacionPorDia[dia-1] = medicion;
 		}
 		else{
-			NodoMedicionesMes auxm = clavehelp2(aux, mes);
+			NodoMedicionesMes auxm =new NodoMedicionesMes();
+				auxm=clavehelp2(aux, mes);
 			if(auxm == null){
-				NodoMedicionesMes aux2 = aux.medicionMes;
-				aux2 = new NodoMedicionesMes();
+				NodoMedicionesMes aux2 = new NodoMedicionesMes();
+				 aux2 = aux.medicionMes;
+				 aux2 = new NodoMedicionesMes();
+				//aux2 = new NodoMedicionesMes();
 				aux2.mes = mes;
 				aux2.cantidadDiasMes = Dias.getInstancia().cantidadDias(mes, anio);
 				aux2.precipitacionPorDia = new int [aux2.cantidadDiasMes];
 				for(int i = 0; i<aux2.cantidadDiasMes; i++ ){
 					aux2.precipitacionPorDia[i] = 0;
 					}
-				aux2.siguienteMes = aux.medicionMes;
-				aux.medicionMes = aux2;
+				//aux2.siguienteMes = aux.medicionMes;
+				//aux.medicionMes = aux2;
 				aux2.precipitacionPorDia[dia-1] = medicion;
+				aux2=aux2.siguienteMes;
 				}
 		}
 	}
@@ -172,18 +176,21 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	}
 	
 	public void eliminarDia(int anio, int mes, int dia) {
-		NodoMedicionesAnio aux = origen;
+		NodoMedicionesAnio aux = new NodoMedicionesAnio();
+		aux = origen;
 		aux = clavehelp(anio);
 		aux.medicionMes = clavehelp2(aux, mes);
-		aux.medicionMes.precipitacionPorDia[dia-1] = 0;
-		int a = 0;
-		for(int i=0; i<aux.medicionMes.cantidadDiasMes; i++){
-			if(aux.medicionMes.precipitacionPorDia[i] == 0){
-				a++;
-			}
+		if(aux.medicionMes != null) {
+			aux.medicionMes.precipitacionPorDia[dia-1] = 0;
+			int a = 0;
+			for(int i=0; i<aux.medicionMes.cantidadDiasMes; i++){
+				if(aux.medicionMes.precipitacionPorDia[i] == 0){
+					a++;
+				}
 		}
-		if(a == aux.medicionMes.cantidadDiasMes)
-			eliminarMes(mes, anio);
+			if(a == aux.medicionMes.cantidadDiasMes)
+				eliminarMes(mes, anio);
+		}
 	}
 
 
