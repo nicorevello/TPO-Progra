@@ -22,7 +22,7 @@ public class DiccionarioSimpleImpl implements DiccionarioSimpleTDA {
 	public void agregar(int clave, int valor) {
 		// TODO Auto-generated method stub
 		int pos = Clave2Indice(clave);
-		if(pos==1){
+		if(pos==-1){
 			pos=cant;
 			elementos[pos]=new Elemento();
 			elementos[pos].clave= clave;

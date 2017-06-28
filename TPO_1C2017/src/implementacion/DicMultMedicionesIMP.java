@@ -47,7 +47,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 			aux.siguienteAnio = origen;
 			origen = aux;
 			NodoMedicionesMes aux2 = aux.medicionMes;
-			//revisar//aux2 = new NodoMedicionesMes();
+			aux2 = new NodoMedicionesMes();
 			aux2.mes = mes;
 			aux2.cantidadDiasMes = Dias.getInstancia().cantidadDias(mes, anio);
 			aux2.precipitacionPorDia = new int [aux2.cantidadDiasMes];
@@ -88,10 +88,10 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 			aux = aux.siguienteAnio;
 			
 		}
-		if(aux==null){
+		/**if(aux==null){
 		return aux = new NodoMedicionesAnio();
 		}
-		else
+		else**/
 			return aux;
 	}
  //
@@ -223,9 +223,11 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		d.inicializar();
 		NodoMedicionesAnio a = origen;
 		a = clavehelp (anio);
-		a.medicionMes = clavehelp2(a, mes);
-		for(int i=0; i<a.medicionMes.cantidadDiasMes; i++){
-			d.agregar(i+1, a.medicionMes.precipitacionPorDia[i]);
+		NodoMedicionesMes aux=clavehelp2(a, mes);
+		if(aux != null) {
+		for(int i=0; i<aux.cantidadDiasMes; i++){
+			d.agregar(i+1, aux.precipitacionPorDia[i]);
+		}
 		}
 		return d;
 	}

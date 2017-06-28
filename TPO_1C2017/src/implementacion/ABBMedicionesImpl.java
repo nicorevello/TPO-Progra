@@ -13,15 +13,16 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 
 	public void agregar(String campo, int anio, int mes, int dia, int medicion) {
 		if (raiz==null){
-			raiz=new NodoCampo();
-			raiz.ciudad=campo;
-			raiz.mediciones=new DicMultMedicionesIMP();
-			raiz.mediciones.inicializar();
-			raiz.mediciones.agregar(anio, mes, dia, medicion);
-			raiz.hijoI=new ABBMedicionesImpl();
-			raiz.hijoD=new ABBMedicionesImpl();
-			raiz.hijoI.inicializar();
-			raiz.hijoD.inicializar();
+			NodoCampo raiz2=new NodoCampo();
+			raiz2.ciudad=campo;
+			raiz2.mediciones=new DicMultMedicionesIMP();
+			raiz2.mediciones.inicializar();
+			raiz2.mediciones.agregar(anio, mes, dia, medicion);
+			raiz2.hijoI=new ABBMedicionesImpl();
+			raiz2.hijoD=new ABBMedicionesImpl();
+			raiz2.hijoI.inicializar();
+			raiz2.hijoD.inicializar();
+			raiz=raiz2;
 		}
 		else if(campo.compareToIgnoreCase(raiz.ciudad)>0){ //compareTo compara lexicograficamente
 			raiz.hijoD.agregar(campo, anio, mes, dia, medicion);
@@ -41,11 +42,11 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 				raiz=null;
 			}
 			else if (raiz.ciudad.equalsIgnoreCase(campo)&&!raiz.hijoI.arbolMedicionesVacio()){
-				raiz.ciudad=this.mayor(raiz.hijoI);
+				raiz.ciudad=mayor(raiz.hijoI);
 				raiz.hijoI.eliminar(raiz.ciudad);
 			}
-			else if (raiz.ciudad.equalsIgnoreCase(campo)&&!raiz.hijoD.arbolMedicionesVacio()){
-				raiz.ciudad=this.menor(raiz.hijoD);
+			else if (raiz.ciudad.equalsIgnoreCase(campo)&&!raiz.hijoD.arbolMedicionesVacio()){ //VER SENTIDO
+				raiz.ciudad=menor(raiz.hijoD);
 				raiz.hijoD.eliminar(raiz.ciudad);
 			}
 			else if (campo.compareToIgnoreCase(raiz.ciudad)<0){
@@ -72,16 +73,18 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 	}
 
 	public void eliminarMedicionDia(String campo, int anio, int mes, int dia) {
-		NodoCampo aux = new NodoCampo();
-		aux=raiz;
-		if (campo.equalsIgnoreCase(aux.ciudad)){
-			aux.mediciones.eliminarDia(anio, mes, dia);			
-		}
-		else if (campo.compareToIgnoreCase(aux.ciudad)>0){
-			aux.hijoD.eliminarMedicionDia(campo, anio, mes, dia);
-		}
-		else if (campo.compareToIgnoreCase(raiz.ciudad)<0){
-			aux.hijoI.eliminarMedicionDia(campo, anio, mes, dia);
+		if(raiz != null) {
+			//NodoCampo aux = new NodoCampo();
+			//aux=raiz;
+			if (campo.equalsIgnoreCase(raiz.ciudad)){
+				raiz.mediciones.eliminarDia(anio, mes, dia);			
+			}
+			else if (campo.compareToIgnoreCase(raiz.ciudad)>0){
+				raiz.hijoD.eliminarMedicionDia(campo, anio, mes, dia);
+			}
+			else if (campo.compareToIgnoreCase(raiz.ciudad)<0){
+				raiz.hijoI.eliminarMedicionDia(campo, anio, mes, dia);
+			}
 		}
 
 	}

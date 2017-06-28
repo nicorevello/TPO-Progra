@@ -36,7 +36,6 @@ public class TestEstructura {
 		mediciones.agregar("La Florinda", 2017, 04, 27, 35);
 		
 		mediciones.eliminarMedicion("La Florinda", 2017, 04, 10);
-		
 		ColaPrioridadInvertidaTDA auxCPI = mediciones.comparativaMensual("la florinda", 04);
 		while(!auxCPI.colaVacia()) {
 			System.out.println("Dia: " + auxCPI.prioridad() + " Precipitacion " + auxCPI.primero());
@@ -77,9 +76,9 @@ public class TestEstructura {
 			auxCS.sacar(campo);
 		}
 		
-		float promedioAnual = mediciones.promedioAnual("La Florinda", 2016);
+		int promedioAnual = mediciones.promedioAnual("La Florinda", 2016);
 		System.out.println(promedioAnual);
-		float promedioMensual = mediciones.promedioMensual("La jarronera", 2016, 1);
+		int promedioMensual = mediciones.promedioMensual("La jarronera", 2016, 1);
 		System.out.println(promedioMensual);
 		
 		mediciones.eliminarMedicion("La Florinda", 2017, 01, 4);

@@ -35,16 +35,20 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 	public ConjuntoStringTDA campos() {
 		ConjuntoStringTDA c = new ConjuntoStringEstatico();
 		c.inicializar();
-		CargarString(arbol,c);
+		if(!arbol.arbolMedicionesVacio())
+			CargarString(arbol,c);
 		return c;	
 	}
 	
 	private void CargarString(ABBMedicionesTDA arbol, ConjuntoStringTDA c ){
-		if(!arbol.hijoDerecho().arbolMedicionesVacio())
+		if(!arbol.arbolMedicionesVacio()) {
+			c.agregar(arbol.campo());
+		//if(!arbol.hijoDerecho().arbolMedicionesVacio())
 			CargarString(arbol.hijoDerecho(),c);
-		if(!arbol.hijoIzquierdo().arbolMedicionesVacio())
+		//if(!arbol.hijoIzquierdo().arbolMedicionesVacio())
 			CargarString(arbol.hijoIzquierdo(),c);
-		c.agregar(arbol.campo());
+		//c.agregar(arbol.campo());
+		}
 	}
 
 	public ColaPrioridadInvertidaTDA mediciones(String campo, int anio, int mes) {
@@ -65,7 +69,7 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 		return c;
 	}
 
-	public float promedioAnual(String campo, int anio) {
+	public int promedioAnual(String campo, int anio) {
 		/**float promedio;                                 otra posible manera!
 		ABBMedicionesTDA aux = new ABBMedicionesImpl();
 		aux = arbol;
@@ -82,20 +86,21 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 		}
 		return promedio;
 	}**/
-		float promedio = 0;
+		int promedio = 0;
 		for(int i = 12; i>0; i--){
-			promedio = promedio + promedioMensual(campo, anio, i);
+			promedio = promedio + promedioMensual(campo, anio, i)*Dias.getInstancia().cantidadDias(i, anio);
 		}
-		return promedio;
+		return promedio/12;
 	}
 		
 
 
-	public float promedioMensual(String campo, int anio, int mes) {
+	public int promedioMensual(String campo, int anio, int mes) {
 		int suma=0;
 		int total=0;
 		ConjuntoTDA c= new ConjuntoEstatico();
 		c.inicializar();
+		int promedio=0;
 		int []vec= new int[1000];
 		ABBMedicionesTDA aux= new ABBMedicionesImpl();
 		aux= arbol;
@@ -114,11 +119,13 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 		}
 		for(int i=0;i<total;i++)
 			suma=aux.mediciones().mediciones(anio, mes).recuperar(vec[i]);
-		return suma/total;
-	}
+		if(total!=0)
+			promedio=suma/total;
+		return promedio;
+	} 
 
 	
-	public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) {
+	/**public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) {
 		ColaPrioridadInvertidaTDA c= new ColaPrioridadInvertidaEstatica();
 		c.inicializar();
 		ABBMedicionesTDA aux= new ABBMedicionesImpl();
@@ -157,5 +164,37 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 			}
 		}
 		return c;
+		} **/
+	private ABBMedicionesTDA BuscarArbol(ABBMedicionesTDA arbol, String campo){ 
+		if (!arbol.arbolMedicionesVacio()){
+			if(arbol.campo().equalsIgnoreCase(campo))
+				return arbol;
+			else if(arbol.campo().compareToIgnoreCase(campo)>0){
+				return BuscarArbol(arbol.hijoIzquierdo(), campo);
+			}
+			else{
+				return BuscarArbol(arbol.hijoDerecho(), campo);
+			}
 		}
+		else
+			return null; // el arbol esta vacio o no existe campo
+	}
+	public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) {
+		ColaPrioridadInvertidaTDA res= new ColaPrioridadInvertidaEstatica();
+		res.inicializar();
+		ABBMedicionesTDA aux=BuscarArbol(arbol, campos);
+		if(aux!=null){
+			ConjuntoTDA anios=aux.mediciones().anios();
+			if(!anios.conjuntoVacio()){
+				int x,prom;
+				while(!anios.conjuntoVacio()){
+					x=anios.elegir();
+					prom=promedioMensual(campos, x, mes);
+					res.acolar(prom, x);
+					anios.sacar(x);
+				}
+			}
+		}
+		return res;
+	}
 	}
