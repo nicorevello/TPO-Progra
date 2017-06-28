@@ -41,7 +41,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	*/
 		
 		NodoMedicionesAnio aux = clavehelp(anio);                        // revisar esta forma!!
-		if(aux == null){//no existe anio
+		if(aux == null){//el anio no existe
 			aux = new NodoMedicionesAnio();
 			aux.anio = anio;
 			aux.siguienteAnio = origen;
@@ -58,25 +58,25 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 			aux.medicionMes = aux2;
 			aux2.precipitacionPorDia[dia-1] = medicion;
 		}
-		else{
+		else{ //el anio existe
 			NodoMedicionesMes auxm =new NodoMedicionesMes();
 				auxm=clavehelp2(aux, mes);
-			if(auxm == null){
-				NodoMedicionesMes aux2 = new NodoMedicionesMes();
-				 aux2 = aux.medicionMes;
-				 aux2 = new NodoMedicionesMes();
-				//aux2 = new NodoMedicionesMes();
+			if(auxm == null){// el mes no existe
+				NodoMedicionesMes aux2 = aux.medicionMes;
+				aux2 = new NodoMedicionesMes();
 				aux2.mes = mes;
 				aux2.cantidadDiasMes = Dias.getInstancia().cantidadDias(mes, anio);
 				aux2.precipitacionPorDia = new int [aux2.cantidadDiasMes];
 				for(int i = 0; i<aux2.cantidadDiasMes; i++ ){
 					aux2.precipitacionPorDia[i] = 0;
 					}
-				//aux2.siguienteMes = aux.medicionMes;
-				//aux.medicionMes = aux2;
-				aux2.precipitacionPorDia[dia-1] = medicion;
-				aux2=aux2.siguienteMes;
-				}
+				aux2.siguienteMes=aux.medicionMes;
+				aux.medicionMes=aux2;
+				aux2.precipitacionPorDia[dia-1]=medicion;
+			}
+			else if(auxm != null){ //el mes ya esxiste
+				auxm.precipitacionPorDia[dia-1]=medicion;
+			}
 		}
 	}
 

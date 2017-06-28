@@ -76,9 +76,9 @@ public class TestEstructura {
 			auxCS.sacar(campo);
 		}
 		
-		int promedioAnual = mediciones.promedioAnual("La Florinda", 2016);
+		float promedioAnual = mediciones.promedioAnual("La Florinda", 2016);
 		System.out.println(promedioAnual);
-		int promedioMensual = mediciones.promedioMensual("La jarronera", 2016, 1);
+		float promedioMensual = mediciones.promedioMensual("La jarronera", 2016, 1);
 		System.out.println(promedioMensual);
 		
 		mediciones.eliminarMedicion("La Florinda", 2017, 01, 4);

@@ -3,7 +3,6 @@ package implementacion;
 import tda.ColaPrioridadInvertidaTDA;
 import tda.ConjuntoStringTDA;
 import tda.ConjuntoTDA;
-//import tda.DiccionarioSimpleTDA;
 import tda.PrecipitacionesTDA;
 import auxiliares.Dias;
 import tda.ABBMedicionesTDA;
