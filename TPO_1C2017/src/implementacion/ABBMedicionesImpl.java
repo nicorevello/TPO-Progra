@@ -29,6 +29,9 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 		else if(campo.compareToIgnoreCase(raiz.ciudad)<0){ 
 			raiz.hijoI.agregar(campo, anio, mes, dia, medicion);
 		}
+		else if(campo.compareToIgnoreCase(raiz.ciudad)==0) {
+			raiz.mediciones.agregar(anio, mes, dia, medicion);
+		}
 
 	}
 

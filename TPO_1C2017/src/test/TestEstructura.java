@@ -38,8 +38,10 @@ public class TestEstructura {
 		mediciones.eliminarMedicion("La Florinda", 2017, 04, 10);
 		
 		ColaPrioridadInvertidaTDA auxCPI = mediciones.comparativaMensual("la florinda", 04);
-		while(!auxCPI.colaVacia())
+		while(!auxCPI.colaVacia()) {
 			System.out.println("Dia: " + auxCPI.prioridad() + " Precipitacion " + auxCPI.primero());
+			auxCPI.desacolar();
+		}
 		
 		mediciones.agregar("La Florera", 2016, 05, 3, 15);
 		mediciones.agregar("La Jarronera", 2016, 06, 5, 10);
@@ -82,8 +84,10 @@ public class TestEstructura {
 		
 		mediciones.eliminarMedicion("La Florinda", 2017, 01, 4);
 		auxCPI = mediciones.comparativaMensual("la florinda", 04);
-		while(!auxCPI.colaVacia())
+		while(!auxCPI.colaVacia()) {
 			System.out.println("Dia: " + auxCPI.prioridad() + " Precipitacion " + auxCPI.primero());
+			auxCPI.desacolar();
+		}
 
 	}
 
