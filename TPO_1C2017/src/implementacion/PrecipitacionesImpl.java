@@ -3,7 +3,7 @@ package implementacion;
 import tda.ColaPrioridadInvertidaTDA;
 import tda.ConjuntoStringTDA;
 import tda.ConjuntoTDA;
-import tda.DiccionarioSimpleTDA;
+//import tda.DiccionarioSimpleTDA;
 import tda.PrecipitacionesTDA;
 import auxiliares.Dias;
 import tda.ABBMedicionesTDA;
@@ -70,131 +70,68 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 	}
 
 	public int promedioAnual(String campo, int anio) {
-		/**float promedio;                                 otra posible manera!
-		ABBMedicionesTDA aux = new ABBMedicionesImpl();
-		aux = arbol;
-		if(aux.campo().compareToIgnoreCase(campo) == 0){
-			for(int i=12;i>0;i--){
-				promedio =promedio + promedioMensual(campo, anio, i);
-			}
-		}
-		else if(aux.campo().compareToIgnoreCase(campo) > 0){
-			promedioAnual(aux.hijoDerecho().campo(), anio);
-		}
-		else if(aux.campo().compareToIgnoreCase(campo) < 0){
-			promedioAnual(aux.hijoIzquierdo().campo(), anio);
-		}
-		return promedio;
-	}**/
 		int promedio = 0;
 		for(int i = 12; i>0; i--){
-			promedio = promedio + promedioMensual(campo, anio, i)*Dias.getInstancia().cantidadDias(i, anio);
-		}
-		return promedio/12;
+			promedio = promedio + promedioMensual(campo, anio, i);
+			}
+		return promedio;
 	}
-		
+	
 
 
 	public int promedioMensual(String campo, int anio, int mes) {
-		int suma=0;
-		int total=0;
-		ConjuntoTDA c= new ConjuntoEstatico();
-		c.inicializar();
-		int promedio=0;
-		int []vec= new int[1000];
-		ABBMedicionesTDA aux= new ABBMedicionesImpl();
-		aux= arbol;
-		while(campo.compareToIgnoreCase(aux.campo()) != 0){
-			if(campo.compareToIgnoreCase(aux.campo()) < 0)
-				aux=aux.hijoIzquierdo();
-			else if(campo.compareToIgnoreCase(aux.campo()) > 0)
-				aux=aux.hijoDerecho();
-		}
-		c=aux.mediciones().mediciones(anio, mes).claves();
-		for(int i=0;!c.conjuntoVacio();i++)
-		{
-			vec[i]=c.elegir();
-			c.sacar(vec[i]);
-			total++;
-		}
-		for(int i=0;i<total;i++)
-			suma=aux.mediciones().mediciones(anio, mes).recuperar(vec[i]);
-		if(total!=0)
-			promedio=suma/total;
-		return promedio;
-	} 
-
-	
-	/**public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) {
-		ColaPrioridadInvertidaTDA c= new ColaPrioridadInvertidaEstatica();
-		c.inicializar();
-		ABBMedicionesTDA aux= new ABBMedicionesImpl();
-		DiccionarioSimpleTDA ds=new DiccionarioSimpleImpl();
-		ds.inicializar();
-		int []vec= new int[100];
-		int suma;
-		int cantanios=0;
-		ConjuntoTDA anios = new ConjuntoEstatico();
-		anios.inicializar();
-		ConjuntoTDA meses = new ConjuntoEstatico();
-		meses.inicializar();
-		while(campos.compareTo(aux.campo()) != 0){
-			if(campos.compareToIgnoreCase(aux.campo()) < 0)
-				aux=aux.hijoDerecho();
-			else if(campos.compareToIgnoreCase(aux.campo()) > 0)
-				aux=aux.hijoIzquierdo();
-		}
-		anios=aux.mediciones().anios();
-		for(int i=0;!anios.conjuntoVacio();i++)
-		{
-			vec[i]=anios.elegir();
-			anios.sacar(vec[i]);
-			cantanios++;
-		}
-		int i=0;
-		int j=0;
-		for(;i<cantanios;i++){
-			meses=aux.mediciones().meses(vec[i]);
-			if(meses.pertenece(mes)){
-				ds=aux.mediciones().mediciones(vec[i], mes);
-				suma=0;
-				for(;i<Dias.getInstancia().cantidadDias(mes,vec[i]);j++)
-					suma=ds.recuperar(j+1)+suma;
-				c.acolar(suma ,vec[i]);
+		int promedio = 0;
+		ABBMedicionesTDA aux = buscarCampo(arbol, campo);
+		int precipitacion, cantidad = 0;
+		if(aux != null){
+			ConjuntoTDA c = aux.mediciones().mediciones(anio, mes).claves();
+			while(!c.conjuntoVacio()){
+				precipitacion = c.elegir();
+				promedio = promedio + aux.mediciones().mediciones(anio, mes).recuperar(precipitacion);
+				c.sacar(precipitacion);
+				cantidad++;
 			}
 		}
-		return c;
-		} **/
-	private ABBMedicionesTDA BuscarArbol(ABBMedicionesTDA arbol, String campo){ 
+		if(cantidad != 0)
+			return promedio/cantidad;
+		else
+			return promedio;
+	}
+	
+	
+	
+	private ABBMedicionesTDA buscarCampo(ABBMedicionesTDA arbol, String campo){
 		if (!arbol.arbolMedicionesVacio()){
 			if(arbol.campo().equalsIgnoreCase(campo))
 				return arbol;
 			else if(arbol.campo().compareToIgnoreCase(campo)>0){
-				return BuscarArbol(arbol.hijoIzquierdo(), campo);
+				return buscarCampo(arbol.hijoIzquierdo(), campo);
 			}
 			else{
-				return BuscarArbol(arbol.hijoDerecho(), campo);
+				return buscarCampo(arbol.hijoDerecho(), campo);
 			}
 		}
 		else
-			return null; // el arbol esta vacio o no existe campo
+			return null;
 	}
+	
+	
 	public ColaPrioridadInvertidaTDA comparativaMensual(String campos, int mes) {
-		ColaPrioridadInvertidaTDA res= new ColaPrioridadInvertidaEstatica();
-		res.inicializar();
-		ABBMedicionesTDA aux=BuscarArbol(arbol, campos);
+		ColaPrioridadInvertidaTDA cola= new ColaPrioridadInvertidaEstatica();
+		cola.inicializar();
+		ABBMedicionesTDA aux=buscarCampo(arbol, campos);
 		if(aux!=null){
 			ConjuntoTDA anios=aux.mediciones().anios();
 			if(!anios.conjuntoVacio()){
-				int x,prom;
+				int a,promedio;
 				while(!anios.conjuntoVacio()){
-					x=anios.elegir();
-					prom=promedioMensual(campos, x, mes);
-					res.acolar(prom, x);
-					anios.sacar(x);
+					a=anios.elegir();
+					promedio=promedioMensual(campos, a, mes);
+					cola.acolar(promedio, a);
+					anios.sacar(a);
 				}
 			}
 		}
-		return res;
-	}
+		return cola;
+		}
 	}

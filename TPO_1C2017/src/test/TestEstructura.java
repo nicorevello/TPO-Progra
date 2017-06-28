@@ -13,10 +13,10 @@ public class TestEstructura {
 	 * */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//PrecipitacionesTDA mediciones = null;
+		PrecipitacionesTDA mediciones = null;
 		// crear la estructura 
 		// inicializar
-		PrecipitacionesTDA mediciones = new PrecipitacionesImpl();
+		mediciones = new PrecipitacionesImpl();
 		mediciones.inicializar();
 		mediciones.agregar("La Florinda", 2016, 04, 3, 15);
 		mediciones.agregar("La Florinda", 2016, 04, 5, 10);

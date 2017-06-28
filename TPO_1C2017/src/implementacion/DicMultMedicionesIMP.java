@@ -41,7 +41,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	*/
 		
 		NodoMedicionesAnio aux = clavehelp(anio);                        // revisar esta forma!!
-		if(aux == null){
+		if(aux == null){//no existe anio
 			aux = new NodoMedicionesAnio();
 			aux.anio = anio;
 			aux.siguienteAnio = origen;
@@ -86,13 +86,8 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		NodoMedicionesAnio aux = origen;
 		while(aux != null && aux.anio != anio){
 			aux = aux.siguienteAnio;
-			
-		}
-		/**if(aux==null){
-		return aux = new NodoMedicionesAnio();
-		}
-		else**/
-			return aux;
+			}
+		return aux;
 	}
  //
 	
@@ -108,8 +103,7 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		
 	private NodoMedicionesMes clavehelp2(NodoMedicionesAnio aux, int mes){       // Revisar esta forma!!
 		NodoMedicionesMes auxm = new NodoMedicionesMes();
-		auxm = aux.medicionMes; 
-		//rastrear aux
+		auxm = aux.medicionMes;
 		while(auxm != null && auxm.mes != mes){
 			auxm = auxm.siguienteMes;
 		}
