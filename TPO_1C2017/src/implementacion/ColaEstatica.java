@@ -7,7 +7,7 @@ public class ColaEstatica implements ColaTDA {
 	int indice;
 	public void inicializarCola() {
 		indice=0;
-		cola=new int[1000]; //ACORDARSE DE CAMBIAR O NO TAMAÑO
+		cola=new int[1000]; //COLOCAR VALORES SEGUN TEST ESTRUCTURA
 	}
 
 	public void acolar(int valor) {

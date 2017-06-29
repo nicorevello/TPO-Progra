@@ -12,7 +12,7 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 	}
 
 	public void agregar(String campo, int anio, int mes, int dia, int medicion) {
-		if (raiz==null){
+		if (raiz==null){ //cuando no tiene nada //raiz2 es el aux de raiz
 			NodoCampo raiz2=new NodoCampo();
 			raiz2.ciudad=campo;
 			raiz2.mediciones=new DicMultMedicionesIMP();
@@ -22,7 +22,7 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 			raiz2.hijoD=new ABBMedicionesImpl();
 			raiz2.hijoI.inicializar();
 			raiz2.hijoD.inicializar();
-			raiz=raiz2;
+			raiz = raiz2;
 		}
 		else if(campo.compareToIgnoreCase(raiz.ciudad)>0){ //compareTo compara lexicograficamente
 			raiz.hijoD.agregar(campo, anio, mes, dia, medicion);
@@ -45,7 +45,7 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 				raiz.ciudad=mayor(raiz.hijoI);
 				raiz.hijoI.eliminar(raiz.ciudad);
 			}
-			else if (raiz.ciudad.equalsIgnoreCase(campo)&&!raiz.hijoD.arbolMedicionesVacio()){ //VER SENTIDO
+			else if (raiz.ciudad.equalsIgnoreCase(campo)&&!raiz.hijoD.arbolMedicionesVacio()){
 				raiz.ciudad=menor(raiz.hijoD);
 				raiz.hijoD.eliminar(raiz.ciudad);
 			}
@@ -74,10 +74,8 @@ public class ABBMedicionesImpl implements ABBMedicionesTDA {
 
 	public void eliminarMedicionDia(String campo, int anio, int mes, int dia) {
 		if(raiz != null) {
-			//NodoCampo aux = new NodoCampo();
-			//aux=raiz;
 			if (campo.equalsIgnoreCase(raiz.ciudad)){
-				raiz.mediciones.eliminarDia(anio, mes, dia);			
+				raiz.mediciones.eliminarDia(anio, mes, dia);
 			}
 			else if (campo.compareToIgnoreCase(raiz.ciudad)>0){
 				raiz.hijoD.eliminarMedicionDia(campo, anio, mes, dia);

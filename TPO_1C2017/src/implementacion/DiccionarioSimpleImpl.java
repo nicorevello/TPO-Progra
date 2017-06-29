@@ -13,14 +13,14 @@ public class DiccionarioSimpleImpl implements DiccionarioSimpleTDA {
 	int cant;
 
 	public void inicializar() {
-		// TODO Auto-generated method stub
+		
 		cant=0;
 		elementos=new Elemento[100];
 
 	}
 
 	public void agregar(int clave, int valor) {
-		// TODO Auto-generated method stub
+		
 		int pos = Clave2Indice(clave);
 		if(pos==-1){
 			pos=cant;
@@ -39,7 +39,7 @@ public class DiccionarioSimpleImpl implements DiccionarioSimpleTDA {
 	}
 
 	public void eliminar(int clave) {
-		// TODO Auto-generated method stub
+		
 		int pos=Clave2Indice(clave);
 		if(pos!=-1){
 			elementos[pos]=elementos[cant-1];
@@ -49,13 +49,13 @@ public class DiccionarioSimpleImpl implements DiccionarioSimpleTDA {
 	}
 
 	public int recuperar(int clave) {
-		// TODO Auto-generated method stub
+		
 		int pos =Clave2Indice(clave);
 		return elementos[pos].valor;
 	}
 
 	public ConjuntoTDA claves() {
-		// TODO Auto-generated method stub
+		
 		ConjuntoTDA	c= new ConjuntoEstatico();
 		c.inicializar();
 		for(int i=0;i<cant;i++){

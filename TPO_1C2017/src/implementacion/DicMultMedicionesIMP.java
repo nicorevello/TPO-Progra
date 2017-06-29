@@ -14,33 +14,8 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	}
 
 	
-	public void agregar(int anio, int mes, int dia, int medicion) {
-		/*int posicion = dia-1;
-		NodoMedicionesAnio aux = clavehelp(anio);
-		if(aux == null){
-			aux = new NodoMedicionesAnio();
-			aux.anio = anio;
-			aux.siguienteAnio = origen;
-			origen = aux;
-		}
-		NodoMedicionesMes aux2 = aux.medicionMes;
-		if(aux2 == null){
-			aux2.cantidadDiasMes = Dias.getInstancia().cantidadDias(mes, anio);
-			aux2.precipitacionPorDia = new int [aux2.cantidadDiasMes];
-			for(int i=0; i<aux2.cantidadDiasMes; i++){
-				aux2.precipitacionPorDia[i] = 0;
-			}
-			aux2.mes = mes;
-		}
-		aux2 = clavehelp2(mes);
-		aux2.precipitacionPorDia[posicion] = medicion;
-		aux2.siguienteMes = aux.medicionMes;
-		aux.medicionMes = aux2;
-	}
-	//ESTE ES EL ORIGINAL
-	*/
-		
-		NodoMedicionesAnio aux = clavehelp(anio);                        // revisar esta forma!!
+	public void agregar(int anio, int mes, int dia, int medicion) {	
+		NodoMedicionesAnio aux = clavehelp(anio);       
 		if(aux == null){//el anio no existe
 			aux = new NodoMedicionesAnio();
 			aux.anio = anio;
@@ -80,7 +55,6 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		}
 	}
 
-	//Revisar esto. El error puede llegar estar aca.
 
 	private NodoMedicionesAnio clavehelp(int anio){ //clavehelp busca nodo del año
 		NodoMedicionesAnio aux = origen;
@@ -89,29 +63,17 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 			}
 		return aux;
 	}
- //
-	
-	/*private NodoMedicionesMes clavehelp2(int mes){ //clavehelp2 busca el nodo del mes.
-		NodoMedicionesMes aux = origen.medicionMes;
-		while(aux != null && aux.mes != mes){
-			aux = aux.siguienteMes;
-		}
-		return aux;
-		
-		//ESTA ES EL ORIGINAL
-	}*/
-		
-	private NodoMedicionesMes clavehelp2(NodoMedicionesAnio aux, int mes){       // Revisar esta forma!!
+ 		
+	private NodoMedicionesMes clavehelp2(NodoMedicionesAnio aux, int mes){   //claveHelp2 busca el mes que se le paso por parametro
 		NodoMedicionesMes auxm = new NodoMedicionesMes();
 		auxm = aux.medicionMes;
 		while(auxm != null && auxm.mes != mes){
 			auxm = auxm.siguienteMes;
 		}
 		return auxm;
-		
 	}
 	
-	public void eliminarAnio(int anio) { //ver
+	public void eliminarAnio(int anio) {
 		if(origen!= null ) {
 			if (origen.anio == anio) {
 			origen = origen.siguienteAnio;
@@ -128,7 +90,6 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 	}
 }
 
-	
 	public void eliminarMes(int mes, int anio) {
 		if(origen!=null){
 			if(origen.anio == anio){
@@ -225,6 +186,5 @@ public class DicMultMedicionesIMP implements DMMedicionesTDA {
 		}
 		return d;
 	}
-
 }
 

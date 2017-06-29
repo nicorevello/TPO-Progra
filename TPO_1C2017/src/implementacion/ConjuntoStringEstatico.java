@@ -22,7 +22,6 @@ public class ConjuntoStringEstatico implements ConjuntoStringTDA {
 			palabras[cantidad]=valor;
 			cantidad++;
 		}
-
 	}
 
 	public String elegir() {
@@ -40,7 +39,6 @@ public class ConjuntoStringEstatico implements ConjuntoStringTDA {
 				cantidad--;
 			}
 		}
-
 	}
 
 	public boolean conjuntoVacio() {
