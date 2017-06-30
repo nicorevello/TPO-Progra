@@ -59,6 +59,7 @@ public class TestEstructura {
 		mediciones.agregar("La Florinda", 2017, 03, 23, 30);
 		mediciones.agregar("La Jarronera", 2017, 03, 27, 35);
 		
+		
 		ConjuntoStringTDA auxCS = mediciones.campos();
 		String campo = null;
 		while(!auxCS.conjuntoVacio()){

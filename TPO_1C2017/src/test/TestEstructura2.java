@@ -1,10 +1,11 @@
 package test;
 
+import implementacion.PrecipitacionesImpl;
 import tda.ColaPrioridadInvertidaTDA;
 import tda.ConjuntoStringTDA;
 import tda.PrecipitacionesTDA;
 
-public class TestEstructura {
+public class TestEstructura2 {
 
 	/**
 	 * Este main es para mediciones en float
@@ -15,6 +16,8 @@ public class TestEstructura {
 		PrecipitacionesTDA mediciones = null;
 		// crear la estructura 
 		// inicializar
+		mediciones = new PrecipitacionesImpl();
+		mediciones.inicializar();
 		
 		
 		mediciones.agregar("La Florinda", 2016, 04, 3, 15);
@@ -39,7 +42,7 @@ public class TestEstructura {
 		ColaPrioridadInvertidaTDA auxCPI = mediciones.comparativaMensual("la florinda", 04);
 		while(!auxCPI.colaVacia()){
 			System.out.println("Dia: " + auxCPI.prioridad() + " Precipitacion " + auxCPI.primero());
-			auxCPI.sacar();
+			auxCPI.desacolar();
 		}
 		
 		mediciones.agregar("La Florera", 2016, 05, 3, 15);
@@ -59,20 +62,20 @@ public class TestEstructura {
 		mediciones.agregar("La Florinda", 2017, 03, 23, 30);
 		mediciones.agregar("La Jarronera", 2017, 03, 27, 35);
 		
-		ConjuntoStringTDA auxCS = mediciones.campos();
-		String campo = null;
-		while(!auxCS.conjuntoVacio()){
-			campo = auxCS.elegir();
-			System.out.println(campo);
-			auxCS.sacar(campo);
+		ConjuntoStringTDA auxCS2 = mediciones.campos();
+		String campo2 = null;
+		while(!auxCS2.conjuntoVacio()){
+			campo2 = auxCS2.elegir();
+			System.out.println(campo2);
+			auxCS2.sacar(campo2);
 		}
 			
 		mediciones.eliminar("la Jarronera");
 
-		while(!auxCS.conjuntoVacio()){
-			campo = auxCS.elegir();
-			System.out.println(campo);
-			auxCS.sacar(campo);
+		while(!auxCS2.conjuntoVacio()){
+			campo2 = auxCS2.elegir();
+			System.out.println(campo2);
+			auxCS2.sacar(campo2);
 		}
 		
 		float promedioAnual = mediciones.promedioAnual("La Florinda", 2016);
@@ -92,7 +95,7 @@ public class TestEstructura {
 		auxCPI = mediciones.comparativaMensual("la florinda", 04);
 		while(!auxCPI.colaVacia()){
 			System.out.println("Dia: " + auxCPI.prioridad() + " Precipitacion " + auxCPI.primero());
-			auxCPI.sacar();
+			auxCPI.desacolar();
 		}
 		
 		mediciones.agregar("El Jagüel", 2016, 03, 22, 25);
@@ -102,12 +105,12 @@ public class TestEstructura {
 		mediciones.agregar("El jagüel", 2017, 01, 6, 30);
 		mediciones.agregar("El Jagüel", 2017, 02, 10, 15);
 		
-		ConjuntoStringTDA auxCS = mediciones.campos();
-		String campo = null;
-		while(!auxCS.conjuntoVacio()){
-			campo = auxCS.elegir();
-			System.out.println(campo);
-			auxCS.sacar(campo);
+		ConjuntoStringTDA auxCS3 = mediciones.campos();
+		String campo3 = null;
+		while(!auxCS3.conjuntoVacio()){
+			campo3 = auxCS3.elegir();
+			System.out.println(campo3);
+			auxCS3.sacar(campo3);
 		}
 		
 		promedioMensual = mediciones.promedioMensual("La jarronera", 2016, 1);
@@ -117,7 +120,7 @@ public class TestEstructura {
 		auxCPI = mediciones.comparativaMensual("El Jagüel", 01);
 		while(!auxCPI.colaVacia()){
 			System.out.println("Dia: " + auxCPI.prioridad() + " Precipitacion " + auxCPI.primero());
-			auxCPI.sacar();
+			auxCPI.desacolar();
 		}
 	}
 
