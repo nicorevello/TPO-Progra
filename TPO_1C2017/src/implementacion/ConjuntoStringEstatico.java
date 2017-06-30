@@ -17,7 +17,7 @@ public class ConjuntoStringEstatico implements ConjuntoStringTDA {
 	}
 
 	public void agregar(String valor) {
-		if(!pertenece (valor))
+		if(!pertenece (valor)) 
 		{
 			palabras[cantidad]=valor;
 			cantidad++;

@@ -71,9 +71,14 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 	public int promedioAnual(String campo, int anio) {
 		int promedio = 0;
 		for(int i = 12; i>0; i--){
-			promedio = promedio + promedioMensual(campo, anio, i);
+			
+			promedio = promedio + (promedioMensual(campo, anio, i)*Dias.getInstancia().cantidadDias(i, anio));
+			//promedio = promedio + promedioMensual(campo, anio, i); //alternativa 
 			}
-		return promedio;
+		if (anio%4==0){
+			return promedio/366;
+		}else 
+			return promedio/365;
 	}
 	
 
@@ -122,15 +127,33 @@ public class PrecipitacionesImpl implements PrecipitacionesTDA {
 		if(aux!=null){
 			ConjuntoTDA anios=aux.mediciones().anios();
 			if(!anios.conjuntoVacio()){
-				int a,promedio;
+				int a,suma;
 				while(!anios.conjuntoVacio()){
 					a=anios.elegir();
-					promedio=promedioMensual(campos, a, mes);
-					cola.acolar(promedio, a);
+					suma=sumaPreciMensual(mes, a, campos);
+					cola.acolar(suma, a);
 					anios.sacar(a);
 				}
 			}
 		}
 		return cola;
 		}
+
+	private int sumaPreciMensual (int mes,int anio, String campo){
+		int suma = 0;
+		ABBMedicionesTDA aux = buscarCampo(arbol, campo);
+		int precipitacion;
+		if(aux != null){
+			ConjuntoTDA c = aux.mediciones().mediciones(anio, mes).claves();
+			while(!c.conjuntoVacio()){
+				precipitacion = c.elegir();
+				suma = suma + aux.mediciones().mediciones(anio, mes).recuperar(precipitacion);
+				c.sacar(precipitacion);
+				
+			}
+		}
+		return suma;
 	}
+	
+}
+

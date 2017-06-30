@@ -27,12 +27,12 @@ public class TestEstructura2 {
 		mediciones.agregar("La Florinda", 2016, 04, 13, 35);
 		mediciones.agregar("La Florinda", 2016, 04, 22, 25);
 		mediciones.agregar("La Florinda", 2016, 04, 23, 25);
-		mediciones.agregar("La Florinda", 2016, 04, 25, 15);
+		mediciones.agregar("La Florinda", 2016, 04, 25, 1500);
 		mediciones.agregar("La Florinda", 2017, 04, 4, 15);
 		mediciones.agregar("La Florinda", 2017, 04, 6, 30);
 		mediciones.agregar("La Florinda", 2017, 04, 10, 15);
 		mediciones.agregar("La Florinda", 2017, 04, 11, 35);
-		mediciones.agregar("La Florinda", 2017, 04, 12, 35);
+		mediciones.agregar("La Florinda", 2017, 04, 12, 3500);
 		mediciones.agregar("La Florinda", 2017, 04, 21, 20);
 		mediciones.agregar("La Florinda", 2017, 04, 23, 30);
 		mediciones.agregar("La Florinda", 2017, 04, 27, 35);
@@ -117,7 +117,7 @@ public class TestEstructura2 {
 		System.out.println(promedioMensual);
 		
 		mediciones.eliminarMedicion("La Florinda", 2017, 01, 4);
-		auxCPI = mediciones.comparativaMensual("El Jagüel", 01);
+		auxCPI = mediciones.comparativaMensual("El Jagüel", 02);
 		while(!auxCPI.colaVacia()){
 			System.out.println("Dia: " + auxCPI.prioridad() + " Precipitacion " + auxCPI.primero());
 			auxCPI.desacolar();
