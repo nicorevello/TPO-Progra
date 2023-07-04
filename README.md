@@ -1,7 +1,13 @@
 # TPO-Progra
 
 
+Programacion II UADE
+1C2017
+
+Docente: Claudio Jose Godio
+
 // Trabajo Práctico Obligatorio
+
 
 Enunciado. 
 
